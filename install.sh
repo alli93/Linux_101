@@ -4,9 +4,9 @@
 datetime_start=$(date)
 printf "Start of execution: $datetime_start\n"
 
-# Welcome message. Will be edited with further installations
+# Welcome message
 printf "Welcome $USER\n"
-printf "This script will install the Sublime Text Editor, along with the Git RVC\n\n"
+printf "This script will install all necessary programs and dependencies for the HGOP course\n\n"
 
 # Store and display linux distribution information
 LINUX_VERSION=$(grep -E '^(NAME|VERSION)' /etc/os-release)
