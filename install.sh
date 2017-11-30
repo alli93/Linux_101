@@ -53,24 +53,22 @@ fi
 
 printf "Installation start...\n"
 
-error_exit "$datetime_start" "$LINENO: Failure on downloading $package $key apt-get key"
-
 # Ensure apt-get is set to work with HTTP sources
 sudo apt-get -y install apt-transport-https
 
 # Add packages to the apt-key index
 key="Sublime Text 3"
-wget -qO - https://download.sublimetext.com/sublimehq-pub.gpg | sudo apt-key add - || error_exit "Line $LINENO: Failure on downloading $package $key apt-get key"
-echo "deb https://download.sublimetext.com/ apt/stable/" | sudo tee /etc/apt/sources.list.d/sublime-text.list || error_exit "$LINENO: Failure on adding $key key to APT key management utility"
+wget -qO - https://download.sublimetext.com/sublimehq-pub.gpg | sudo apt-key add - || error_exit "$datetime_start" "Line $LINENO: Failure on downloading $package $key apt-get key"
+echo "deb https://download.sublimetext.com/ apt/stable/" | sudo tee /etc/apt/sources.list.d/sublime-text.list || error_exit "$datetime_start" "$LINENO: Failure on adding $key key to APT key management utility"
 
 # Synchronize package index
-sudo apt-get -y update	|| error_exit "$LINENO: Failure on synchronizing apt-get package index" 
+sudo apt-get -y update	|| error_exit "$datetime_start" "$LINENO: Failure on synchronizing apt-get package index" 
 
 # Install packages
 package="Sublime Text 3"
-sudo apt-get install -y sublime-text  || "$LINENO: Failure on installing $package"
+sudo apt-get install -y sublime-text  || "$datetime_start" "$LINENO: Failure on installing $package"
 package="Git"
-sudo apt-get install -y git-all || "$LINENO: Failure on installing $package"
+sudo apt-get install -y git || "$datetime_start" "$LINENO: Failure on installing $package"
 
 # Store and display end-of-script date and time
 datetime_end=$(date)
